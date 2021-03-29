@@ -2,7 +2,7 @@
 const FuzzyResults = {
   NOT_IMPLEMENTED: 'Ops.. Future is not supported yet',
   NOW: 'just then',
-  SECONDS_AGO: ' a second ago',
+  SECONDS_AGO: ' seconds ago',
   MINUTE_AGO: ' minutes ago',
   HOURS_AGO: 'hours ago.'
 };
@@ -48,11 +48,19 @@ export default class DateFormatted {
     }
     
     if (delta < HOUR) {
-      const minRounded = Math.round(delta/MINUTE);
+      const minRounded = DateFormatted.convertToMinutes(delta);
       return `${minRounded} ${FuzzyResults.MINUTE_AGO}`;
     }
 
     const hourRounded = Math.round(delta/HOUR/1000);
     return `${hourRounded} ${FuzzyResults.HOURS_AGO}`;
+  }
+
+  static convertToMinutes(milliseconds: number) {
+    return Math.round(milliseconds/MINUTE);
+  }
+
+  static convertToHours(milliseconds: number) {
+    return Math.round(milliseconds/HOUR);
   }
 }

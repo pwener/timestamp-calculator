@@ -1,7 +1,7 @@
-import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
 import './App.css';
-import { Container, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import Result from './components/Result';
 import Header from './components/Header';
 import Input from './components/Input';
@@ -37,27 +37,25 @@ const App = () => {
   const setEndHighOrderFn = (input: number) => format(setEnd)(input);
 
   return (
-    <Container fluid>
-      <Header />
-      <Input
-        placeholder="Timestamp 1"
-        label="Start"
-        date={start}
-        onChange={setStartHighOrderFn} />
-      <Input
-        placeholder="Timestamp 2"
-        label="Final"
-        date={end}
-        onChange={setEndHighOrderFn} />
-      <Container>
-        <Row
-          className="justify-content-md-center"
-          style={{ marginTop: 50 }}
-        >
-          <Result diff={calculate()} />
-        </Row>
-      </Container>
-    </Container>      
+    <>
+      <Container fluid>
+        <Header />
+        <Input
+          placeholder="Type the first timestamp"
+          label="Start"
+          date={start}
+          onChange={setStartHighOrderFn}
+        />
+        <Input
+          placeholder="Type the second timestamp"
+          label="Final"
+          date={end}
+          onChange={setEndHighOrderFn}
+          finalField
+        />
+        <Result diff={calculate()} />
+      </Container>  
+    </>
   );
 }
 

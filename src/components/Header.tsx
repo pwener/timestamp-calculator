@@ -1,10 +1,10 @@
 import React from 'react';
-import { Badge } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 
 const Header = () => (
-  <h2 style={{ marginBottom: 50 }}>
-    Timestamp Calculator <Badge variant="secondary">0.0.1</Badge>
-  </h2>
+  <Navbar>
+    <Navbar.Brand href="#home">Timestamp Calculator</Navbar.Brand>
+  </Navbar>
 );
 
 export default Header;
