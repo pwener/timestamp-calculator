@@ -1,6 +1,6 @@
 # Timestamp calculator
 
-## `yarn install`
+### `yarn install`
 
 To install project
 
