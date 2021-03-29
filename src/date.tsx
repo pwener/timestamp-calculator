@@ -24,8 +24,8 @@ export default class DateFormatted {
     const date = new Date(dateValue);
     this.timestamp = dateValue;
     this.year = date.getFullYear();
-    this.month = date.getMonth();
-    this.day = date.getDay();
+    this.month = date.getMonth() + 1;
+    this.day = date.getDay() + 1;
     this.hour = date.getHours();
     this.minute = date.getMinutes();
     this.second = date.getSeconds();
