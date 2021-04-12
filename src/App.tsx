@@ -1,11 +1,11 @@
 import React, { Dispatch, SetStateAction } from 'react';
 
 import './App.css';
-import { Container } from 'react-bootstrap';
-import Result from './components/Result';
+import Result from './components/Result/Result';
 import Header from './components/Header';
-import Input from './components/Input';
+import Input from './components/Input/Input';
 import DateFormatted from './date';
+import colors from './colours';
 
 const INVALID_STATE = -1;
 
@@ -38,24 +38,23 @@ const App = () => {
 
   return (
     <>
-      <Container fluid>
-        <Header />
-        <Input
-          placeholder="Type the first timestamp"
-          label="Start"
-          date={start}
-          onChange={setStartHighOrderFn}
-        />
-        <Input
-          placeholder="Type the second timestamp"
-          label="Final"
-          date={end}
-          onChange={setEndHighOrderFn}
-          finalField
-        />
-        <Result diff={calculate()} />
-      </Container>  
-    </>
+      <Header />
+      <Input
+        placeholder="Type the first timestamp"
+        label="Start"
+        date={start}
+        onChange={setStartHighOrderFn}
+        color={colors.primary}
+      />
+      <Input
+        placeholder="Type the second timestamp"
+        label="Final"
+        date={end}
+        onChange={setEndHighOrderFn}
+        color={colors.secondary}
+      />
+      <Result diff={calculate()} />
+    </>  
   );
 }
 

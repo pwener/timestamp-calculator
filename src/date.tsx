@@ -1,6 +1,6 @@
 
 const FuzzyResults = {
-  NOT_IMPLEMENTED: 'Ops.. Future is not supported yet',
+  NOT_IMPLEMENTED: 'Ops... Future is not supported yet',
   NOW: 'just then',
   SECONDS_AGO: ' seconds ago',
   MINUTE_AGO: ' minutes ago',
