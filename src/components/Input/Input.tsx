@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Form } from "react-bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import DateFormatted from '../../date';
 import ConvertedTable from './ConvertedTable';
 import { TitleRow, InputWrapper, FormInput } from './Styled';
@@ -10,9 +12,10 @@ interface IProps {
   label: string;
   placeholder: string;
   color: string;
+  icon: IconDefinition;
 }
 
-const Input = ({date, onChange, label, placeholder, color}: IProps) => {
+const Input = ({date, onChange, label, placeholder, color, icon}: IProps) => {
   const [relativeDate, setRelativeDate] = useState('-');
   
   const handleChange = (event: any) => {
@@ -34,7 +37,10 @@ const Input = ({date, onChange, label, placeholder, color}: IProps) => {
         className="justify-content-md-center"
       >
         <Form>
-          <Form.Label>{label}</Form.Label>
+          <Form.Label>
+            <FontAwesomeIcon icon={icon} color="#636e72" />
+            {" " + label}
+          </Form.Label>
           <FormInput
             type="text"
             placeholder={placeholder}
@@ -44,7 +50,10 @@ const Input = ({date, onChange, label, placeholder, color}: IProps) => {
           />
         </Form>
           {/* TODO: change to relative component */}
-        <h5 style={{width: 200}}>{relativeDate}</h5>
+        <h5 style={{width: 200}}>
+          <FontAwesomeIcon icon={faClock} color="#636e72" />
+          {" " + relativeDate}
+        </h5>
       </TitleRow>
       <ConvertedTable date={date} />
     </InputWrapper>

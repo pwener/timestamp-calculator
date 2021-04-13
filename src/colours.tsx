@@ -1,9 +1,9 @@
 const colors = {
-  lightError: "#f1c40f",
-  success: "#2ecc71",
-  primary: "#95a5a6",
-  secondary: "#bdc3c7",
-  tertiary : "#ecf0f1",
+  lightError: "#ffeaa7",
+  success: "#00b894",
+  primary: "#dfe6e9",
+  secondary: "#b2bec3",
+  tertiary : "#74b9ff",
 };
 
 export default colors;

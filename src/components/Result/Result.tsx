@@ -21,18 +21,9 @@ const Result = (props: IProps) => {
         <h4>
           {invalidValues ?
             'No valid timestamps' :
-            `Difference result`}
+            `Difference Result`}
         </h4>
       </TitleRow>
-      <Row
-        className="justify-content-md-center"
-      >
-        <h6>
-          {invalidValues ?
-              'You should type two dates in timestamp format' :
-              'This table shows the result(final-start) in different units'}
-        </h6>
-      </Row>
       { !invalidValues ? (
           <Row
               className="justify-content-md-center"
@@ -56,6 +47,15 @@ const Result = (props: IProps) => {
             </Row>
         ) : null
       }
+      <Row
+        className="justify-content-md-center"
+      >
+        <h6>
+          {invalidValues ?
+            'You should type two dates in timestamp format' :
+            'This table shows the result(final-start) in different units'}
+        </h6>
+      </Row>
     </ResultWrapper>
   );
 }

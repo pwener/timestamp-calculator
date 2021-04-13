@@ -1,11 +1,12 @@
 import React, { Dispatch, SetStateAction } from 'react';
 
-import './App.css';
+import Explain from './components/Explain/Explain';
 import Result from './components/Result/Result';
 import Header from './components/Header';
 import Input from './components/Input/Input';
 import DateFormatted from './date';
 import colors from './colours';
+import { faHourglassEnd, faHourglassStart } from '@fortawesome/free-solid-svg-icons';
 
 const INVALID_STATE = -1;
 
@@ -45,6 +46,7 @@ const App = () => {
         date={start}
         onChange={setStartHighOrderFn}
         color={colors.primary}
+        icon={faHourglassStart}
       />
       <Input
         placeholder="Type the second timestamp"
@@ -52,8 +54,10 @@ const App = () => {
         date={end}
         onChange={setEndHighOrderFn}
         color={colors.secondary}
+        icon={faHourglassEnd}
       />
       <Result diff={calculate()} />
+      <Explain />
     </>  
   );
 }

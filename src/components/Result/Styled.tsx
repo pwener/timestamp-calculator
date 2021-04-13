@@ -4,6 +4,7 @@ import colors from '../../colours';
 
 const ResultWrapper = styled.div`
   background-color: ${({ invalidValues }) => invalidValues ? colors.lightError : colors.success};
+  padding-bottom: 20px;
 `;
 ResultWrapper.defaultProps = {
   fluid: true,

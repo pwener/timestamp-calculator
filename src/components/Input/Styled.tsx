@@ -1,5 +1,6 @@
 import { Row, Form, Container } from 'react-bootstrap';
 import styled from 'styled-components';
+import colors from '../../colours';
 
 const InputWrapper = styled(Container)`
   background-color: ${({color}) => color};
@@ -21,7 +22,7 @@ const FormInput = styled(Form.Control)`
   background-color: ${({color}) => color};
   border-radius: 0px;
   border: solid 0px;
-  border-bottom: solid 2px #ecf0f1;
+  border-bottom: solid 2px ${colors.tertiary};
   font-size: 36px;
 `;
 
