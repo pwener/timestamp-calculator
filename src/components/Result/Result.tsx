@@ -1,7 +1,7 @@
-import React from 'react';
-import { Col, Row, Table } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { ButtonGroup, Row, ToggleButton } from 'react-bootstrap';
 import DateFormatted from '../../date';
-import { TitleRow, ResultWrapper } from './Styled';
+import { TitleRow, ResultWrapper, ResultNumber } from './Styled';
 
 interface IProps {
   diff: number;
@@ -10,6 +10,16 @@ interface IProps {
 const Result = (props: IProps) => {
   // TODO remove magic number
   const invalidValues = props.diff === -1;
+  const [radioValue, setRadioValue] = useState('1');
+
+  const radios = [
+    { name: 'Milliseconds', value: '1'},
+    { name: 'Seconds', value: '2', callback: DateFormatted.convertToSeconds },
+    { name: 'Minutes', value: '3', callback: DateFormatted.convertToMinutes },
+    { name: 'Hours', value: '4', callback: DateFormatted.convertToHours },
+  ];
+
+  const convertCallback = radios.find(r => r.value === radioValue)?.callback;
 
   return (
     <ResultWrapper
@@ -25,36 +35,38 @@ const Result = (props: IProps) => {
         </h4>
       </TitleRow>
       { !invalidValues ? (
-          <Row
-              className="justify-content-md-center"
-            >
-              <Col md="3">
-                <Table responsive="md" borderless>
-                  <thead>
-                    <tr>
-                      <th>Miliseconds</th>
-                      <th>Minutes</th>
-                      <th>Hours</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <td>{props.diff}</td>
-                    <td>{DateFormatted.convertToMinutes(props.diff)}</td>
-                    <td>{DateFormatted.convertToHours(props.diff)}</td>
-                  </tbody>
-                </Table>
-              </Col>
+          <>
+            <Row className="justify-content-md-center">
+              <ResultNumber>
+                {convertCallback ? convertCallback(props.diff) : props.diff}
+              </ResultNumber>
             </Row>
+            <Row className="justify-content-md-center">
+              <ButtonGroup toggle>
+                {radios.map((radio, idx) => (
+                  <ToggleButton
+                    key={idx}
+                    type="radio"
+                    variant="outline-dark"
+                    name="radio"
+                    value={radio.value}
+                    checked={radioValue === radio.value}
+                    onChange={(e) => setRadioValue(e.currentTarget.value)}
+                  >
+                    {radio.name}
+                  </ToggleButton>
+                ))}
+              </ButtonGroup>
+            </Row>
+          </>
         ) : null
       }
       <Row
         className="justify-content-md-center"
       >
-        <h6>
           {invalidValues ?
             'You should type two dates in timestamp format' :
-            'This table shows the result(final-start) in different units'}
-        </h6>
+            null}
       </Row>
     </ResultWrapper>
   );

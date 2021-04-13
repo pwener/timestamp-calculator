@@ -56,6 +56,10 @@ export default class DateFormatted {
     return `${hourRounded} ${FuzzyResults.HOURS_AGO}`;
   }
 
+  static convertToSeconds(milliseconds: number) {
+    return milliseconds / SECOND;
+  }
+
   static convertToMinutes(milliseconds: number) {
     return Math.round(milliseconds/MINUTE);
   }
