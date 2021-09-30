@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { FormInput, InputWrapper, TitleRow } from "./Styled";
+import { IconDefinition, faClock } from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useState } from "react";
+
+import ConvertedTable from "./ConvertedTable";
+import DateFormatter from "../../date";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Form } from "react-bootstrap";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock, IconDefinition } from '@fortawesome/free-solid-svg-icons'
-import DateFormatted from '../../date';
-import ConvertedTable from './ConvertedTable';
-import { TitleRow, InputWrapper, FormInput } from './Styled';
 
 interface IProps {
-  date: DateFormatted | undefined;
+  date: DateFormatter | undefined;
   onChange: (dateTimestamp: number) => void;
   label: string;
   placeholder: string;
@@ -15,27 +16,25 @@ interface IProps {
   icon: IconDefinition;
 }
 
-const Input = ({date, onChange, label, placeholder, color, icon}: IProps) => {
-  const [relativeDate, setRelativeDate] = useState('-');
-  
+const Input = ({ date, onChange, label, placeholder, color, icon }: IProps) => {
+  const [relativeDate, setRelativeDate] = useState("-");
+
   const handleChange = (event: any) => {
     let fieldValue = event.target.value;
     onChange(parseInt(fieldValue, 10));
-  }
+  };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      const relativeDate = date?.getRelativeDate() || '-';
+      const relativeDate = date?.getRelativeDate() || "-";
       setRelativeDate(relativeDate);
     }, 1000);
     return () => clearInterval(intervalId);
-  }, [date])
+  }, [date]);
 
   return (
     <InputWrapper color={color}>
-      <TitleRow
-        className="justify-content-md-center"
-      >
+      <TitleRow className="justify-content-md-center">
         <Form>
           <Form.Label>
             <FontAwesomeIcon icon={icon} color="#636e72" />
@@ -44,13 +43,13 @@ const Input = ({date, onChange, label, placeholder, color, icon}: IProps) => {
           <FormInput
             type="text"
             placeholder={placeholder}
-            value={date?.timestamp || ''}
+            value={date?.timestamp || ""}
             color={color}
             onChange={(e: any) => handleChange(e)}
           />
         </Form>
-          {/* TODO: change to relative component */}
-        <h5 style={{width: 200}}>
+        {/* TODO: change to relative component */}
+        <h5 style={{ width: 200 }}>
           <FontAwesomeIcon icon={faClock} color="#636e72" />
           {" " + relativeDate}
         </h5>
@@ -58,6 +57,6 @@ const Input = ({date, onChange, label, placeholder, color, icon}: IProps) => {
       <ConvertedTable date={date} />
     </InputWrapper>
   );
-}
+};
 
 export default Input;

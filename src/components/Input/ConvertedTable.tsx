@@ -1,19 +1,18 @@
-import React from 'react';
 import { Col, Table } from "react-bootstrap";
-import { ConvertedRow } from './Styled';
-import DateFormatted from '../../date';
+
+import { ConvertedRow } from "./Styled";
+import DateFormatter from "../../date";
+import React from "react";
 
 interface IConvertedTable {
-  date: DateFormatted | undefined;
+  date: DateFormatter | undefined;
 }
 
 const ConvertedTable = ({ date }: IConvertedTable) => {
-  const formatValue = (value?: number) => date ? value : '-';
+  const formatValue = (value?: number) => (date ? value : "-");
 
   return (
-    <ConvertedRow
-      className="justify-content-md-center"
-    >
+    <ConvertedRow className="justify-content-md-center">
       <Col md="5">
         <Table borderless size="sm">
           <thead>
@@ -41,7 +40,7 @@ const ConvertedTable = ({ date }: IConvertedTable) => {
         </Table>
       </Col>
     </ConvertedRow>
-  )
+  );
 };
 
 export default ConvertedTable;

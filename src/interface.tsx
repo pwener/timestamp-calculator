@@ -1,4 +1,4 @@
-export interface DateFormatted {
+export interface DateFormatter {
   timestamp: number;
   year: number;
   month: number;

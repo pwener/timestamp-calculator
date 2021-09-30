@@ -1,16 +1,15 @@
-
-const FuzzyResults = {
-  NOT_IMPLEMENTED: 'Ops... Future is not supported yet',
-  NOW: 'just then',
-  SECONDS_AGO: ' seconds ago',
-  MINUTE_AGO: ' minutes ago',
-  HOURS_AGO: 'hours ago.'
+export const FuzzyResults = {
+  FUTURE_ERROR: "Ops... Future is not supported yet",
+  NOW: "just then",
+  SECONDS_AGO: " seconds ago",
+  MINUTE_AGO: " minutes ago",
+  HOURS_AGO: "hours ago.",
 };
 const SECOND = 1000; // milliseconds
 const MINUTE = 60 * SECOND;
 const HOUR = MINUTE * 60;
 
-export default class DateFormatted {
+export default class DateFormatter {
   timestamp: number;
   year: number;
   month: number;
@@ -35,24 +34,26 @@ export default class DateFormatted {
   getRelativeDate() {
     const delta = Date.now() - this.timestamp;
 
-    if (delta < 0) return FuzzyResults.NOT_IMPLEMENTED;
-
+    if (delta < 0) {
+      return FuzzyResults.FUTURE_ERROR;
+    }
 
     if (delta < 1000) {
       return FuzzyResults.NOW;
     }
-    
-    if (delta < MINUTE &&  delta > SECOND) {
-      const secRound = Math.round(delta/1000);
+
+    if (delta < MINUTE && delta > SECOND) {
+      const secRound = Math.round(delta / 1000);
       return `${secRound} ${FuzzyResults.SECONDS_AGO}`;
     }
-    
+
     if (delta < HOUR) {
-      const minRounded = DateFormatted.convertToMinutes(delta);
+      const minRounded = DateFormatter.convertToMinutes(delta);
       return `${minRounded} ${FuzzyResults.MINUTE_AGO}`;
     }
 
-    const hourRounded = Math.round(delta/HOUR/1000);
+    const hourRounded = Math.round(delta / HOUR);
+
     return `${hourRounded} ${FuzzyResults.HOURS_AGO}`;
   }
 
@@ -61,10 +62,10 @@ export default class DateFormatted {
   }
 
   static convertToMinutes(milliseconds: number) {
-    return Math.round(milliseconds/MINUTE);
+    return Math.round(milliseconds / MINUTE);
   }
 
   static convertToHours(milliseconds: number) {
-    return Math.round(milliseconds/HOUR);
+    return Math.round(milliseconds / HOUR);
   }
 }
